@@ -3,7 +3,7 @@ import ThemeToggle from './ThemeToggle.jsx'
 import { useEffect } from 'react'
 
 export default function Navbar() {
-  // Persist theme
+  
   useEffect(() => {
     const saved = localStorage.getItem('theme')
     if (saved === 'dark') document.documentElement.classList.add('dark')

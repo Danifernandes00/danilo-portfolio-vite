@@ -25,9 +25,7 @@ export default function ProjectDetail() {
         {project.title}
       </h1>
 
-      {/* layout responsivo: imagem à esquerda, texto à direita (em telas md+) */}
       <div className="mt-5 md:flex md:items-start md:gap-8">
-        {/* IMAGEM – tamanho consistente e maior */}
         <div className="w-full md:w-[420px]">
           <div className="rounded overflow-hidden bg-gray-100 dark:bg-gray-800 shadow">
             <img
@@ -37,8 +35,6 @@ export default function ProjectDetail() {
             />
           </div>
         </div>
-
-        {/* CONTEÚDO */}
         <div className="mt-4 md:mt-0 flex-1">
           <p className="text-gray-700 dark:text-gray-300">
             {project.description}
