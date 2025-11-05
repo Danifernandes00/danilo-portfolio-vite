@@ -1,31 +1,40 @@
-import { useMemo, useState } from 'react'
-import projects from '../data/projects.js'
-import SearchBar from '../components/SearchBar.jsx'
-import ProjectCard from '../components/ProjectCard.jsx'
+import { Link } from "react-router-dom";
+import projects from "../data/projects";
 
 export default function Projects() {
-  const [query, setQuery] = useState('')
-
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase()
-    if (!q) return projects
-    return projects.filter(p => 
-      p.title.toLowerCase().includes(q) ||
-      p.tech.some(t => t.toLowerCase().includes(q))
-    )
-  }, [query])
-
   return (
-    <section>
-      <h1 className="text-2xl font-bold mb-4">Projetos</h1>
-      <SearchBar value={query} onChange={setQuery} />
-      {filtered.length === 0 ? (
-        <p role="status" aria-live="polite">Nenhum projeto localizado.</p>
-      ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filtered.map(p => <ProjectCard key={p.slug} project={p} />)}
-        </div>
-      )}
-    </section>
-  )
+    <div className="container max-w-6xl mx-auto px-4">
+      <h1 className="text-2xl font-semibold mt-6">Projetos</h1>
+
+      <div className="grid gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3">
+        {projects.map((p) => (
+          <article
+          key={p.slug}
+          className="card border rounded-lg p-4 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm"
+        >
+          <img
+            src={p.img}
+            alt={p.title}
+            className="w-full h-72 object-cover rounded"
+          />
+        
+          <h3 className="text-lg font-semibold mt-2 text-gray-900 dark:text-gray-100">
+            {p.title}
+          </h3>
+        
+          <p className="text-sm mt-1 text-gray-600 dark:text-gray-300">
+            {p.excerpt}
+          </p>
+        
+          <Link
+            className="inline-block mt-3 text-blue-600 dark:text-blue-400 underline"
+            to={`/projetos/${p.slug}`}
+          >
+            Ver detalhes
+          </Link>
+        </article>
+        ))}
+      </div>
+    </div>
+  );
 }
